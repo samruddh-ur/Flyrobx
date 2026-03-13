@@ -1,0 +1,2208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SKYRIFT — Premium Drone Store</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #111827;
+  --deep: #f4f6fb;
+  --card: #ffffff;
+  --border: #e2e8f0;
+  --accent: #0077ff;
+  --accent2: #ff3d6b;
+  --accent3: #7b2fff;
+  --white: #111827;
+  --muted: #64748b;
+  --gold: #f59e0b;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: #f4f6fb;
+  color: var(--white);
+  font-family: 'Rajdhani', sans-serif;
+  overflow-x: hidden;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #e2e8f0; }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 60px; height: 70px;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0,119,255,0.12);
+  box-shadow: 0 1px 20px rgba(0,0,0,0.06);
+}
+
+.logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px; letter-spacing: 4px;
+  color: var(--white);
+  text-decoration: none;
+}
+.logo span { color: var(--accent); }
+
+.nav-links {
+  display: flex; gap: 40px; list-style: none;
+}
+.nav-links a {
+  color: var(--muted); text-decoration: none;
+  font-size: 13px; letter-spacing: 2px; text-transform: uppercase;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--accent); }
+
+.nav-actions {
+  display: flex; gap: 16px; align-items: center;
+}
+
+.nav-btn {
+  background: none; border: 1px solid var(--border);
+  color: var(--white); padding: 8px 16px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 12px; font-weight: 600; letter-spacing: 2px;
+  text-transform: uppercase; cursor: pointer;
+  transition: all 0.2s;
+}
+.nav-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+.cart-btn {
+  background: var(--accent); border: none;
+  color: var(--black); padding: 8px 20px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 12px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; cursor: pointer;
+  position: relative; transition: all 0.2s;
+}
+.cart-btn:hover { background: #00dbbf; }
+.cart-count {
+  position: absolute; top: -6px; right: -6px;
+  background: var(--accent2); color: white;
+  width: 18px; height: 18px; border-radius: 50%;
+  font-size: 10px; display: flex; align-items: center; justify-content: center;
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  position: relative; overflow: hidden;
+  padding: 100px 60px 60px;
+  background: linear-gradient(135deg, #eef3ff 0%, #f8faff 60%, #fff 100%);
+}
+
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,119,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,119,255,0.06) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridMove 20s linear infinite;
+}
+@keyframes gridMove {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(60px); }
+}
+
+.hero-glow {
+  position: absolute; top: 20%; right: 10%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(0,119,255,0.12) 0%, transparent 70%);
+  animation: pulse 4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+
+.hero-content {
+  position: relative; z-index: 2; max-width: 700px;
+}
+
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid rgba(0,119,255,0.3);
+  background: rgba(0,119,255,0.06);
+  padding: 6px 16px; margin-bottom: 32px;
+  font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--accent); font-family: 'Space Mono', monospace;
+}
+.hero-tag::before {
+  content: '';
+  width: 6px; height: 6px; background: var(--accent);
+  border-radius: 50%; animation: blink 1.5s infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; } 50% { opacity: 0; }
+}
+
+h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(72px, 10vw, 130px);
+  line-height: 0.9; letter-spacing: 2px;
+  margin-bottom: 32px;
+}
+h1 .line2 { color: var(--accent); display: block; }
+
+.hero-sub {
+  font-size: 16px; color: var(--muted); line-height: 1.8;
+  margin-bottom: 48px; max-width: 480px;
+  font-weight: 400;
+}
+
+.hero-ctas {
+  display: flex; gap: 16px; flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: var(--accent); color: var(--black);
+  border: none; padding: 16px 40px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 14px; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; cursor: pointer;
+  text-decoration: none; display: inline-flex; align-items: center; gap: 12px;
+  transition: all 0.25s;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+}
+.btn-primary:hover {
+  background: white; transform: translateY(-2px);
+  box-shadow: 0 20px 60px rgba(0,245,212,0.3);
+}
+
+.btn-secondary {
+  background: transparent; color: var(--white);
+  border: 1px solid var(--border); padding: 16px 40px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 14px; font-weight: 600; letter-spacing: 3px;
+  text-transform: uppercase; cursor: pointer;
+  text-decoration: none; display: inline-flex; align-items: center; gap: 12px;
+  transition: all 0.25s;
+}
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+.hero-stats {
+  position: absolute; bottom: 60px; right: 60px;
+  display: flex; gap: 48px; z-index: 2;
+}
+.stat { text-align: right; }
+.stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 42px; color: var(--white); line-height: 1;
+}
+.stat-num span { color: var(--accent); }
+.stat-label {
+  font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted); font-family: 'Space Mono', monospace;
+}
+
+.hero-drone {
+  position: absolute; right: -60px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 320px; opacity: 0.12;
+  animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(-50%) rotate(-5deg); }
+  50% { transform: translateY(calc(-50% - 20px)) rotate(5deg); }
+}
+
+/* MARQUEE */
+.marquee-wrap {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden; padding: 16px 0;
+  background: white;
+}
+.marquee-track {
+  display: flex; white-space: nowrap;
+  animation: marquee 25s linear infinite;
+}
+.marquee-track span {
+  padding: 0 40px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px; letter-spacing: 4px; color: #94a3b8;
+}
+.marquee-track span.accent { color: var(--accent); }
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* SECTIONS */
+section { padding: 120px 60px; }
+
+.section-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+.section-label::before {
+  content: ''; width: 30px; height: 1px; background: var(--accent);
+}
+
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(42px, 6vw, 72px);
+  line-height: 1; margin-bottom: 64px;
+}
+
+/* CATEGORIES */
+.categories { background: white; }
+
+.cats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+}
+
+.cat-card {
+  position: relative; overflow: hidden;
+  aspect-ratio: 3/4;
+  cursor: pointer;
+  background: var(--card);
+  border: 1px solid var(--border);
+  transition: all 0.4s;
+}
+.cat-card:hover { border-color: var(--accent); }
+.cat-card:hover .cat-overlay { opacity: 1; }
+.cat-card:hover .cat-icon { transform: scale(1.1) rotate(5deg); }
+
+.cat-icon {
+  font-size: 80px; display: flex; align-items: center; justify-content: center;
+  height: 60%; transition: transform 0.4s;
+  background: linear-gradient(135deg, rgba(0,119,255,0.06), rgba(123,47,255,0.04));
+}
+
+.cat-info {
+  padding: 24px;
+  border-top: 1px solid var(--border);
+}
+.cat-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px; letter-spacing: 2px; margin-bottom: 4px;
+}
+.cat-count {
+  font-size: 12px; color: var(--muted); letter-spacing: 1px;
+  font-family: 'Space Mono', monospace;
+}
+
+.cat-overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,245,212,0.05);
+  opacity: 0; transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+/* PRODUCTS */
+.products-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 64px;
+}
+
+.filter-tabs {
+  display: flex; gap: 4px;
+}
+.filter-tab {
+  padding: 8px 20px; background: none;
+  border: 1px solid var(--border);
+  color: var(--muted); cursor: pointer;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 12px; font-weight: 600; letter-spacing: 2px;
+  text-transform: uppercase; transition: all 0.2s;
+}
+.filter-tab.active, .filter-tab:hover {
+  background: var(--accent); border-color: var(--accent); color: var(--black);
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.product-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  position: relative; overflow: hidden;
+  transition: all 0.3s; cursor: pointer;
+}
+.product-card:hover { border-color: rgba(0,245,212,0.4); transform: translateY(-4px); }
+.product-card:hover .product-actions { opacity: 1; transform: translateY(0); }
+.product-card:hover .product-img-wrap::after { opacity: 1; }
+
+.product-badge {
+  position: absolute; top: 16px; left: 16px; z-index: 2;
+  padding: 4px 12px;
+  font-size: 10px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; font-family: 'Space Mono', monospace;
+}
+.badge-new { background: var(--accent); color: var(--black); }
+.badge-sale { background: var(--accent2); color: white; }
+.badge-hot { background: var(--accent3); color: white; }
+
+.product-img-wrap {
+  height: 260px; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #eef3ff, #f0f4ff);
+  font-size: 120px; position: relative; overflow: hidden;
+}
+.product-img-wrap::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at center, rgba(0,119,255,0.08), transparent 70%);
+  opacity: 0; transition: opacity 0.3s;
+}
+
+.product-actions {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: rgba(255,255,255,0.97);
+  padding: 16px; display: flex; gap: 8px;
+  opacity: 0; transform: translateY(100%); transition: all 0.3s;
+  border-top: 1px solid var(--border);
+}
+
+.action-btn {
+  flex: 1; padding: 10px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 12px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; cursor: pointer; border: none;
+  transition: all 0.2s;
+}
+.action-add {
+  background: var(--accent); color: var(--black);
+}
+.action-add:hover { background: white; }
+.action-wish {
+  background: #f1f5f9; color: #64748b; width: 40px; flex: none;
+  border: 1px solid var(--border);
+}
+.action-wish:hover { background: var(--accent2); color: white; border-color: var(--accent2); }
+
+.product-info { padding: 24px; }
+
+.product-brand {
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 8px;
+  font-family: 'Space Mono', monospace;
+}
+
+.product-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px; letter-spacing: 1px; margin-bottom: 8px;
+  line-height: 1.1;
+}
+
+.product-specs {
+  display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap;
+}
+.spec-tag {
+  font-size: 10px; padding: 3px 8px;
+  border: 1px solid var(--border); color: var(--muted);
+  font-family: 'Space Mono', monospace;
+}
+
+.product-price-row {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.product-price {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px; color: var(--accent);
+}
+.product-price-old {
+  font-size: 14px; color: var(--muted); text-decoration: line-through;
+  margin-left: 8px;
+}
+
+.product-rating {
+  display: flex; align-items: center; gap: 4px; color: var(--gold);
+  font-size: 12px;
+}
+
+/* FEATURED */
+.featured { background: #f4f6fb; }
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px; min-height: 600px;
+}
+
+.featured-main {
+  background: linear-gradient(135deg, #1a2a6c, #0a3cff);
+  border: none;
+  padding: 60px; position: relative; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  color: white;
+}
+.featured-main::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(0,0,0,0.2));
+}
+.featured-drone {
+  position: absolute; top: 50%; right: -40px;
+  transform: translateY(-50%);
+  font-size: 280px; opacity: 0.12;
+  animation: float 8s ease-in-out infinite;
+}
+.featured-content { position: relative; z-index: 1; }
+.featured-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: 4px; color: rgba(255,255,255,0.7);
+  margin-bottom: 16px; text-transform: uppercase;
+}
+.featured-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 56px; line-height: 1; margin-bottom: 16px; color: white;
+}
+.featured-price {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 48px; color: #7efff5; margin-bottom: 32px;
+}
+
+.featured-side {
+  display: grid; grid-template-rows: 1fr 1fr; gap: 2px;
+}
+.featured-mini {
+  background: var(--card); border: 1px solid var(--border);
+  padding: 40px; position: relative; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  transition: border-color 0.3s; cursor: pointer;
+}
+.featured-mini:hover { border-color: var(--accent); }
+.mini-icon {
+  position: absolute; top: 20px; right: 20px;
+  font-size: 80px; opacity: 0.15;
+}
+.mini-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px; margin-bottom: 8px;
+}
+.mini-price {
+  font-size: 22px; color: var(--accent);
+  font-family: 'Bebas Neue', sans-serif;
+}
+
+/* WHY US */
+.why-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+}
+.why-card {
+  background: var(--card); border: 1px solid var(--border);
+  padding: 40px 32px;
+  transition: all 0.3s;
+}
+.why-card:hover {
+  border-color: var(--accent);
+  background: rgba(0,245,212,0.03);
+  transform: translateY(-4px);
+}
+.why-icon { font-size: 36px; margin-bottom: 24px; }
+.why-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px; letter-spacing: 1px; margin-bottom: 12px;
+}
+.why-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+/* BRANDS */
+.brands { background: white; text-align: center; }
+.brands-grid {
+  display: flex; align-items: center; justify-content: center;
+  gap: 60px; flex-wrap: wrap; margin-top: 64px;
+}
+.brand-item {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px; letter-spacing: 4px; color: #cbd5e1;
+  opacity: 1; transition: all 0.3s; cursor: pointer;
+}
+.brand-item:hover { color: var(--accent); }
+
+/* NEWSLETTER */
+.newsletter {
+  background: linear-gradient(135deg, #0a3cff, #7b2fff);
+  border-top: none;
+  border-bottom: none;
+  text-align: center; padding: 100px 60px;
+  color: white;
+}
+.newsletter h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(42px, 6vw, 80px); margin-bottom: 16px; color: white;
+}
+.newsletter p { color: rgba(255,255,255,0.75); margin-bottom: 40px; font-size: 16px; }
+.newsletter-form {
+  display: flex; gap: 0; max-width: 480px; margin: 0 auto;
+}
+.newsletter-input {
+  flex: 1; padding: 16px 24px;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3); border-right: none;
+  color: white; font-family: 'Rajdhani', sans-serif;
+  font-size: 14px; outline: none;
+}
+.newsletter-input:focus { border-color: white; }
+.newsletter-input::placeholder { color: rgba(255,255,255,0.5); }
+.newsletter-submit {
+  padding: 16px 32px;
+  background: white; border: none; color: #0a3cff;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; cursor: pointer; transition: all 0.2s;
+}
+.newsletter-submit:hover { background: #eef3ff; }
+
+/* FOOTER */
+footer {
+  background: #111827;
+  border-top: none;
+  padding: 80px 60px 40px;
+  color: #f1f5f9;
+}
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px; margin-bottom: 60px;
+}
+.footer-brand .logo { display: inline-block; margin-bottom: 20px; }
+.footer-brand p { color: #94a3b8; font-size: 14px; line-height: 1.8; max-width: 280px; margin-bottom: 24px; }
+.social-links { display: flex; gap: 12px; }
+.social-link {
+  width: 36px; height: 36px; border: 1px solid #334155;
+  display: flex; align-items: center; justify-content: center;
+  color: #94a3b8; text-decoration: none; font-size: 14px;
+  transition: all 0.2s;
+}
+.social-link:hover { border-color: var(--accent); color: var(--accent); }
+
+.footer-col h4 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px; letter-spacing: 2px; margin-bottom: 24px; color: white;
+}
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 12px; }
+.footer-col ul a {
+  color: #94a3b8; text-decoration: none; font-size: 14px;
+  transition: color 0.2s;
+}
+.footer-col ul a:hover { color: var(--accent); }
+
+.footer-bottom {
+  border-top: 1px solid #1e293b;
+  padding-top: 32px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-bottom p { color: #64748b; font-size: 12px; letter-spacing: 1px; font-family: 'Space Mono', monospace; }
+
+.payment-icons {
+  display: flex; gap: 8px; align-items: center;
+}
+.pay-icon {
+  padding: 4px 10px;
+  border: 1px solid #334155; color: #64748b;
+  font-size: 11px; font-family: 'Space Mono', monospace;
+  letter-spacing: 1px;
+}
+
+/* CART SIDEBAR */
+.cart-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+  z-index: 2000; opacity: 0; pointer-events: none;
+  transition: opacity 0.3s;
+}
+.cart-overlay.open { opacity: 1; pointer-events: all; }
+
+.cart-sidebar {
+  position: fixed; top: 0; right: 0; bottom: 0;
+  width: 440px; background: white;
+  border-left: 1px solid var(--border);
+  z-index: 2001; transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: flex; flex-direction: column;
+}
+.cart-sidebar.open { transform: translateX(0); }
+
+.cart-header {
+  padding: 28px 32px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.cart-header h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px; letter-spacing: 3px;
+}
+.close-cart {
+  background: none; border: 1px solid var(--border);
+  color: var(--white); width: 36px; height: 36px;
+  cursor: pointer; font-size: 18px; transition: all 0.2s;
+}
+.close-cart:hover { border-color: var(--accent2); color: var(--accent2); }
+
+.cart-items { flex: 1; overflow-y: auto; padding: 24px 32px; }
+
+.cart-item {
+  display: flex; gap: 16px; padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+}
+.cart-item-img {
+  width: 80px; height: 80px;
+  background: #f4f6fb; display: flex; align-items: center; justify-content: center;
+  font-size: 36px; flex-shrink: 0;
+  border: 1px solid var(--border);
+}
+.cart-item-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px; letter-spacing: 1px; margin-bottom: 4px;
+}
+.cart-item-price { color: var(--accent); font-size: 16px; font-weight: 600; }
+.cart-item-qty {
+  display: flex; align-items: center; gap: 12px; margin-top: 8px;
+}
+.qty-btn {
+  width: 26px; height: 26px; background: #f4f6fb;
+  border: 1px solid var(--border); color: #111827;
+  cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center;
+}
+.qty-num { font-family: 'Space Mono', monospace; font-size: 13px; }
+
+.cart-footer {
+  padding: 24px 32px;
+  border-top: 1px solid var(--border);
+}
+.cart-total {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 24px;
+}
+.cart-total span { font-size: 14px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+.cart-total strong {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px; color: var(--accent);
+}
+.checkout-btn {
+  width: 100%; padding: 18px;
+  background: var(--accent); border: none; color: var(--black);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 15px; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; cursor: pointer; transition: all 0.2s;
+  margin-bottom: 12px;
+}
+.checkout-btn:hover { background: white; }
+.continue-btn {
+  width: 100%; padding: 14px;
+  background: none; border: 1px solid var(--border); color: var(--muted);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px; font-weight: 600; letter-spacing: 2px;
+  text-transform: uppercase; cursor: pointer; transition: all 0.2s;
+}
+.continue-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+.cart-payment-note {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  margin-top: 16px; color: var(--muted); font-size: 11px;
+  font-family: 'Space Mono', monospace; letter-spacing: 1px;
+}
+
+/* TOAST */
+.toast {
+  position: fixed; bottom: 32px; right: 32px; z-index: 3000;
+  background: var(--accent); color: var(--black);
+  padding: 14px 24px;
+  font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  transform: translateY(80px); opacity: 0;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+
+/* PAGES */
+.page { display: none; }
+.page.active { display: block; }
+
+/* SHOP PAGE */
+.shop-hero {
+  padding: 140px 60px 80px;
+  background: linear-gradient(135deg, #eef3ff, #f4f6fb);
+  border-bottom: 1px solid var(--border);
+}
+.shop-hero h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 72px; letter-spacing: 2px;
+}
+.shop-layout {
+  display: grid; grid-template-columns: 280px 1fr;
+  gap: 0; padding: 0;
+}
+.shop-sidebar {
+  padding: 48px 32px;
+  border-right: 1px solid var(--border);
+  min-height: calc(100vh - 70px);
+  background: white;
+}
+.sidebar-section { margin-bottom: 40px; }
+.sidebar-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px; letter-spacing: 3px; margin-bottom: 20px;
+  color: var(--white);
+}
+.filter-option {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 12px; cursor: pointer;
+}
+.filter-check {
+  width: 16px; height: 16px; border: 1px solid var(--border);
+  transition: all 0.2s; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.filter-check.checked { background: var(--accent); border-color: var(--accent); }
+.filter-check.checked::after { content: '✓'; color: var(--black); font-size: 10px; font-weight: bold; }
+.filter-label { font-size: 14px; color: var(--muted); }
+.filter-count { font-size: 11px; color: var(--muted); margin-left: auto; font-family: 'Space Mono', monospace; }
+
+.price-range { margin-top: 12px; }
+.price-slider {
+  width: 100%; -webkit-appearance: none; appearance: none;
+  height: 2px; background: var(--border); outline: none;
+}
+.price-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 16px; height: 16px; background: var(--accent); cursor: pointer;
+  border-radius: 0;
+}
+.price-labels {
+  display: flex; justify-content: space-between;
+  font-size: 12px; color: var(--muted); margin-top: 12px;
+  font-family: 'Space Mono', monospace;
+}
+
+.shop-main { padding: 48px; }
+.shop-toolbar {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 32px; padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+.results-count { font-size: 14px; color: var(--muted); }
+.results-count span { color: var(--white); font-weight: 600; }
+.sort-select {
+  background: white; border: 1px solid var(--border);
+  color: #111827; padding: 8px 16px;
+  font-family: 'Rajdhani', sans-serif; font-size: 13px;
+  cursor: pointer; outline: none;
+}
+
+/* PRODUCT DETAIL PAGE */
+.product-detail {
+  padding: 120px 60px 80px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: start;
+}
+.detail-gallery {
+  position: sticky; top: 100px;
+}
+.main-image {
+  width: 100%; height: 500px;
+  background: linear-gradient(135deg, #eef3ff, #f0f4ff);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 200px; margin-bottom: 16px;
+  position: relative; overflow: hidden;
+}
+.main-image::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at center, rgba(0,119,255,0.06), transparent);
+}
+.thumb {
+  width: 80px; height: 80px;
+  background: #f4f6fb; border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 32px; cursor: pointer; transition: border-color 0.2s;
+}
+.thumb.active, .thumb:hover { border-color: var(--accent); }
+
+.detail-info { padding-top: 20px; }
+.detail-brand {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; letter-spacing: 4px; color: var(--accent);
+  text-transform: uppercase; margin-bottom: 12px;
+}
+.detail-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 56px; line-height: 1; margin-bottom: 20px;
+}
+.detail-rating {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 28px;
+}
+.stars { color: var(--gold); font-size: 16px; }
+.rating-count { font-size: 13px; color: var(--muted); }
+
+.detail-price {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 52px; color: var(--accent); margin-bottom: 8px;
+}
+.detail-price-old {
+  font-size: 18px; color: var(--muted); text-decoration: line-through;
+  margin-bottom: 32px; display: block;
+}
+
+.detail-desc {
+  font-size: 15px; color: var(--muted); line-height: 1.8;
+  margin-bottom: 36px; border-left: 2px solid var(--accent);
+  padding-left: 20px;
+}
+
+.detail-specs {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 2px; margin-bottom: 40px;
+}
+.spec-item {
+  background: #f8faff; border: 1px solid var(--border);
+  padding: 16px 20px;
+}
+.spec-key {
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 4px;
+  font-family: 'Space Mono', monospace;
+}
+.spec-val {
+  font-size: 16px; font-weight: 600; color: var(--white);
+}
+
+.qty-row {
+  display: flex; align-items: center; gap: 16px; margin-bottom: 24px;
+}
+.qty-control {
+  display: flex; align-items: center;
+  border: 1px solid var(--border);
+}
+.qty-control button {
+  width: 44px; height: 44px; background: #f8faff;
+  border: none; color: #111827; font-size: 18px;
+  cursor: pointer; transition: background 0.2s;
+}
+.qty-control button:hover { background: var(--accent); color: white; }
+.qty-display {
+  width: 60px; text-align: center;
+  font-family: 'Bebas Neue', sans-serif; font-size: 20px;
+  border-left: 1px solid var(--border); border-right: 1px solid var(--border);
+  height: 44px; display: flex; align-items: center; justify-content: center;
+}
+
+.add-to-cart-main {
+  flex: 1; padding: 0 32px; height: 44px;
+  background: var(--accent); border: none; color: var(--black);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 14px; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; cursor: pointer; transition: all 0.2s;
+}
+.add-to-cart-main:hover { background: white; }
+
+.buy-now-btn {
+  width: 100%; padding: 14px;
+  background: none; border: 1px solid var(--accent); color: var(--accent);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 14px; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; cursor: pointer; transition: all 0.2s;
+  margin-bottom: 24px;
+}
+.buy-now-btn:hover { background: var(--accent); color: var(--black); }
+
+.trust-badges {
+  display: flex; gap: 16px; flex-wrap: wrap; padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.trust-badge {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--muted);
+}
+.trust-badge span { font-size: 18px; }
+
+/* CHECKOUT PAGE */
+.checkout-page { padding: 120px 60px 80px; }
+.checkout-page h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 56px; margin-bottom: 56px;
+}
+.checkout-grid {
+  display: grid; grid-template-columns: 1fr 400px; gap: 48px;
+}
+.checkout-steps {
+  display: flex; gap: 0; margin-bottom: 48px;
+}
+.step {
+  flex: 1; padding: 16px 24px; text-align: center;
+  border: 1px solid var(--border); position: relative;
+  font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+  font-family: 'Space Mono', monospace; color: var(--muted);
+  transition: all 0.3s;
+}
+.step.active {
+  background: var(--accent); border-color: var(--accent);
+  color: var(--black); font-weight: 700;
+}
+.step.done {
+  border-color: rgba(0,245,212,0.3); color: var(--accent);
+}
+
+.form-section { margin-bottom: 40px; }
+.form-section h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px; letter-spacing: 2px; margin-bottom: 24px;
+  padding-bottom: 12px; border-bottom: 1px solid var(--border);
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.form-group { margin-bottom: 16px; }
+.form-label {
+  display: block; font-size: 11px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
+  font-family: 'Space Mono', monospace;
+}
+.form-input {
+  width: 100%; padding: 14px 16px;
+  background: white; border: 1px solid var(--border);
+  color: #111827; font-family: 'Rajdhani', sans-serif;
+  font-size: 15px; outline: none; transition: border-color 0.2s;
+}
+.form-input:focus { border-color: var(--accent); }
+.form-input::placeholder { color: #94a3b8; }
+
+/* Payment Methods */
+.payment-methods { margin-bottom: 32px; }
+.payment-method {
+  display: flex; align-items: center; gap: 16px;
+  padding: 20px; border: 1px solid var(--border);
+  margin-bottom: 8px; cursor: pointer; transition: all 0.2s;
+}
+.payment-method:hover, .payment-method.selected {
+  border-color: var(--accent);
+  background: rgba(0,245,212,0.04);
+}
+.payment-radio {
+  width: 18px; height: 18px; border: 2px solid var(--border);
+  border-radius: 50%; flex-shrink: 0; transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center;
+}
+.payment-method.selected .payment-radio {
+  border-color: var(--accent);
+}
+.payment-method.selected .payment-radio::after {
+  content: ''; width: 8px; height: 8px;
+  background: var(--accent); border-radius: 50%;
+}
+.payment-method-icon { font-size: 24px; }
+.payment-method-info h4 { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+.payment-method-info p { font-size: 12px; color: var(--muted); }
+
+.card-fields { margin-top: 16px; }
+
+/* Order Summary */
+.order-summary {
+  background: white; border: 1px solid var(--border);
+  padding: 32px; position: sticky; top: 100px;
+  height: fit-content;
+}
+.order-summary h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px; letter-spacing: 2px; margin-bottom: 24px;
+}
+.order-item {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  padding: 16px 0; border-bottom: 1px solid var(--border);
+}
+.order-item-name { font-size: 14px; max-width: 200px; }
+.order-item-qty { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.order-item-price { font-size: 16px; font-weight: 600; color: var(--accent); }
+.order-totals { padding: 24px 0; }
+.order-line {
+  display: flex; justify-content: space-between;
+  margin-bottom: 12px; font-size: 14px;
+}
+.order-line .label { color: var(--muted); }
+.order-line.total {
+  border-top: 1px solid var(--border);
+  padding-top: 16px; margin-top: 8px;
+  font-family: 'Bebas Neue', sans-serif; font-size: 24px;
+}
+.order-line.total .price { color: var(--accent); }
+
+.promo-code {
+  display: flex; gap: 8px; margin-bottom: 24px;
+}
+.promo-input {
+  flex: 1; padding: 12px 16px;
+  background: #f8faff; border: 1px solid var(--border);
+  color: #111827; font-family: 'Rajdhani', sans-serif; font-size: 14px;
+  outline: none;
+}
+.promo-input:focus { border-color: var(--accent); }
+.promo-btn {
+  padding: 12px 20px; background: none;
+  border: 1px solid var(--border); color: var(--muted);
+  font-family: 'Rajdhani', sans-serif; font-size: 13px; font-weight: 600;
+  letter-spacing: 1px; text-transform: uppercase; cursor: pointer;
+  transition: all 0.2s;
+}
+.promo-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+.secure-checkout {
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 16px; color: var(--muted);
+  font-size: 12px; font-family: 'Space Mono', monospace;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  nav { padding: 0 32px; }
+  .hero { padding: 120px 32px 80px; }
+  section { padding: 80px 32px; }
+  .products-grid { grid-template-columns: repeat(2, 1fr); }
+  .cats-grid { grid-template-columns: repeat(2, 1fr); }
+  .featured-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .product-detail { grid-template-columns: 1fr; }
+  .checkout-grid { grid-template-columns: 1fr; }
+  .shop-layout { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  h1 { font-size: 56px; }
+  .hero-stats { position: static; margin-top: 48px; justify-content: flex-start; }
+  .products-grid { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+  .cart-sidebar { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo" onclick="showPage('home')">SKY<span>RIFT</span></a>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('shop')">Shop</a></li>
+    <li><a href="#" onclick="showPage('home'); setTimeout(()=>document.querySelector('.categories').scrollIntoView({behavior:'smooth'}),100)">Categories</a></li>
+    <li><a href="#" onclick="showPage('home'); setTimeout(()=>document.querySelector('.brands').scrollIntoView({behavior:'smooth'}),100)">Brands</a></li>
+    <li><a href="#">Support</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="nav-btn">Sign In</button>
+    <button class="cart-btn" onclick="toggleCart()">
+      🛒 Cart
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h3>YOUR CART</h3>
+    <button class="close-cart" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div style="text-align:center;padding:60px 0;color:var(--muted);">
+      <div style="font-size:48px;margin-bottom:16px;">🚁</div>
+      <p style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">YOUR CART IS EMPTY</p>
+    </div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span>Total</span>
+      <strong id="cartTotal">AED 0</strong>
+    </div>
+    <button class="checkout-btn" onclick="showPage('checkout'); toggleCart()">Proceed to Checkout →</button>
+    <button class="continue-btn" onclick="toggleCart()">Continue Shopping</button>
+    <div class="cart-payment-note">🔒 Secure Checkout · SSL Encrypted</div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- ====== HOME PAGE ====== -->
+<div class="page active" id="page-home">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-drone">🚁</div>
+  <div class="hero-content">
+    <div class="hero-tag">Now shipping to UAE & India</div>
+    <h1>
+      FLY<br>
+      <span class="line2">BEYOND</span>
+    </h1>
+    <p class="hero-sub">Professional drones for creators, engineers, and explorers. From hobbyist to enterprise — we carry every UAV you need.</p>
+    <div class="hero-ctas">
+      <a href="#" class="btn-primary" onclick="showPage('shop')">Shop Drones <span>→</span></a>
+      <a href="#" class="btn-secondary" onclick="showPage('detail')">View Featured ✦</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">500<span>+</span></div>
+      <div class="stat-label">Products</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">98<span>%</span></div>
+      <div class="stat-label">Satisfied</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">24<span>h</span></div>
+      <div class="stat-label">Delivery</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>DJI MAVIC</span><span class="accent">✦</span>
+    <span>AUTEL ROBOTICS</span><span class="accent">✦</span>
+    <span>PARROT</span><span class="accent">✦</span>
+    <span>SKYDIO</span><span class="accent">✦</span>
+    <span>FREE SHIPPING OVER AED 500</span><span class="accent">✦</span>
+    <span>HOLY STONE</span><span class="accent">✦</span>
+    <span>POTENSIC</span><span class="accent">✦</span>
+    <span>HUBSAN</span><span class="accent">✦</span>
+    <span>DJI MAVIC</span><span class="accent">✦</span>
+    <span>AUTEL ROBOTICS</span><span class="accent">✦</span>
+    <span>PARROT</span><span class="accent">✦</span>
+    <span>SKYDIO</span><span class="accent">✦</span>
+    <span>FREE SHIPPING OVER AED 500</span><span class="accent">✦</span>
+    <span>HOLY STONE</span><span class="accent">✦</span>
+    <span>POTENSIC</span><span class="accent">✦</span>
+    <span>HUBSAN</span><span class="accent">✦</span>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section class="categories">
+  <div class="section-label">Browse by Type</div>
+  <div class="section-title">SHOP CATEGORIES</div>
+  <div class="cats-grid">
+    <div class="cat-card" onclick="showPage('shop')">
+      <div class="cat-icon">🚁</div>
+      <div class="cat-info">
+        <div class="cat-name">Consumer Drones</div>
+        <div class="cat-count">124 products</div>
+      </div>
+      <div class="cat-overlay"></div>
+    </div>
+    <div class="cat-card" onclick="showPage('shop')">
+      <div class="cat-icon">📷</div>
+      <div class="cat-info">
+        <div class="cat-name">Camera Drones</div>
+        <div class="cat-count">89 products</div>
+      </div>
+      <div class="cat-overlay"></div>
+    </div>
+    <div class="cat-card" onclick="showPage('shop')">
+      <div class="cat-icon">🏭</div>
+      <div class="cat-info">
+        <div class="cat-name">Enterprise UAV</div>
+        <div class="cat-count">56 products</div>
+      </div>
+      <div class="cat-overlay"></div>
+    </div>
+    <div class="cat-card" onclick="showPage('shop')">
+      <div class="cat-icon">🏎️</div>
+      <div class="cat-info">
+        <div class="cat-name">Racing Drones</div>
+        <div class="cat-count">78 products</div>
+      </div>
+      <div class="cat-overlay"></div>
+    </div>
+    <div class="cat-card" onclick="showPage('shop')">
+      <div class="cat-icon">⚙️</div>
+      <div class="cat-info">
+        <div class="cat-name">Parts & Motors</div>
+        <div class="cat-count">220 products</div>
+      </div>
+      <div class="cat-overlay"></div>
+    </div>
+    <div class="cat-card" onclick="showPage('shop')">
+      <div class="cat-icon">🔋</div>
+      <div class="cat-info">
+        <div class="cat-name">Batteries & Power</div>
+        <div class="cat-count">95 products</div>
+      </div>
+      <div class="cat-overlay"></div>
+    </div>
+    <div class="cat-card" onclick="showPage('shop')">
+      <div class="cat-icon">📡</div>
+      <div class="cat-info">
+        <div class="cat-name">Controllers</div>
+        <div class="cat-count">62 products</div>
+      </div>
+      <div class="cat-overlay"></div>
+    </div>
+    <div class="cat-card" onclick="showPage('shop')">
+      <div class="cat-icon">🎓</div>
+      <div class="cat-info">
+        <div class="cat-name">Starter Kits</div>
+        <div class="cat-count">33 products</div>
+      </div>
+      <div class="cat-overlay"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section>
+  <div class="products-header">
+    <div>
+      <div class="section-label">Handpicked</div>
+      <div class="section-title" style="margin-bottom:0">BESTSELLERS</div>
+    </div>
+    <div class="filter-tabs">
+      <button class="filter-tab active">All</button>
+      <button class="filter-tab">DJI</button>
+      <button class="filter-tab">Autel</button>
+      <button class="filter-tab">Racing</button>
+    </div>
+  </div>
+  <div class="products-grid">
+
+    <!-- Product 1 -->
+    <div class="product-card">
+      <div class="product-badge badge-new">New</div>
+      <div class="product-img-wrap">
+        🚁
+        <div class="product-actions">
+          <button class="action-btn action-add" onclick="addToCart('DJI Mavic 4 Pro', 4599)">Add to Cart</button>
+          <button class="action-btn action-wish">♡</button>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">DJI</div>
+        <div class="product-name" onclick="showPage('detail')" style="cursor:pointer">Mavic 4 Pro</div>
+        <div class="product-specs">
+          <span class="spec-tag">4K/120fps</span>
+          <span class="spec-tag">46min</span>
+          <span class="spec-tag">20km</span>
+        </div>
+        <div class="product-price-row">
+          <div>
+            <span class="product-price">AED 4,599</span>
+            <span class="product-price-old">AED 5,200</span>
+          </div>
+          <div class="product-rating">★★★★★ <span style="color:var(--muted)">(241)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="product-card">
+      <div class="product-badge badge-hot">Hot</div>
+      <div class="product-img-wrap" style="background:linear-gradient(135deg,#f0eeff,#f8f4ff)">
+        🛸
+        <div class="product-actions">
+          <button class="action-btn action-add" onclick="addToCart('Autel EVO II Pro', 3299)">Add to Cart</button>
+          <button class="action-btn action-wish">♡</button>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">Autel Robotics</div>
+        <div class="product-name" onclick="showPage('detail')" style="cursor:pointer">EVO II Pro V3</div>
+        <div class="product-specs">
+          <span class="spec-tag">6K</span>
+          <span class="spec-tag">42min</span>
+          <span class="spec-tag">15km</span>
+        </div>
+        <div class="product-price-row">
+          <div>
+            <span class="product-price">AED 3,299</span>
+          </div>
+          <div class="product-rating">★★★★☆ <span style="color:var(--muted)">(178)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="product-card">
+      <div class="product-badge badge-sale">-30%</div>
+      <div class="product-img-wrap" style="background:linear-gradient(135deg,#e8f4ff,#f0f8ff)">
+        🚀
+        <div class="product-actions">
+          <button class="action-btn action-add" onclick="addToCart('DJI FPV Combo', 2199)">Add to Cart</button>
+          <button class="action-btn action-wish">♡</button>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">DJI</div>
+        <div class="product-name" onclick="showPage('detail')" style="cursor:pointer">FPV Combo</div>
+        <div class="product-specs">
+          <span class="spec-tag">4K/60fps</span>
+          <span class="spec-tag">150km/h</span>
+          <span class="spec-tag">10km</span>
+        </div>
+        <div class="product-price-row">
+          <div>
+            <span class="product-price">AED 2,199</span>
+            <span class="product-price-old">AED 3,100</span>
+          </div>
+          <div class="product-rating">★★★★★ <span style="color:var(--muted)">(95)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 4 -->
+    <div class="product-card">
+      <div class="product-img-wrap" style="background:linear-gradient(135deg,#f0fbf0,#f5fff5)">
+        🌿
+        <div class="product-actions">
+          <button class="action-btn action-add" onclick="addToCart('DJI Agras T40', 42000)">Add to Cart</button>
+          <button class="action-btn action-wish">♡</button>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">DJI</div>
+        <div class="product-name" onclick="showPage('detail')" style="cursor:pointer">Agras T40 Agricultural</div>
+        <div class="product-specs">
+          <span class="spec-tag">40L Tank</span>
+          <span class="spec-tag">Agriculture</span>
+          <span class="spec-tag">Enterprise</span>
+        </div>
+        <div class="product-price-row">
+          <div>
+            <span class="product-price">AED 42,000</span>
+          </div>
+          <div class="product-rating">★★★★☆ <span style="color:var(--muted)">(34)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 5 -->
+    <div class="product-card">
+      <div class="product-badge badge-new">New</div>
+      <div class="product-img-wrap" style="background:linear-gradient(135deg,#fff0f5,#fef2f7)">
+        🎯
+        <div class="product-actions">
+          <button class="action-btn action-add" onclick="addToCart('Holy Stone HS720E', 699)">Add to Cart</button>
+          <button class="action-btn action-wish">♡</button>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">Holy Stone</div>
+        <div class="product-name" onclick="showPage('detail')" style="cursor:pointer">HS720E Foldable</div>
+        <div class="product-specs">
+          <span class="spec-tag">4K EIS</span>
+          <span class="spec-tag">26min</span>
+          <span class="spec-tag">Beginner</span>
+        </div>
+        <div class="product-price-row">
+          <div>
+            <span class="product-price">AED 699</span>
+          </div>
+          <div class="product-rating">★★★★☆ <span style="color:var(--muted)">(312)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 6 -->
+    <div class="product-card">
+      <div class="product-badge badge-sale">-15%</div>
+      <div class="product-img-wrap" style="background:linear-gradient(135deg,#e8f4ff,#f0f8ff)">
+        💎
+        <div class="product-actions">
+          <button class="action-btn action-add" onclick="addToCart('Skydio 2+', 5499)">Add to Cart</button>
+          <button class="action-btn action-wish">♡</button>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">Skydio</div>
+        <div class="product-name" onclick="showPage('detail')" style="cursor:pointer">Skydio 2+ Plus</div>
+        <div class="product-specs">
+          <span class="spec-tag">Autonomous</span>
+          <span class="spec-tag">360° AI</span>
+          <span class="spec-tag">27min</span>
+        </div>
+        <div class="product-price-row">
+          <div>
+            <span class="product-price">AED 5,499</span>
+            <span class="product-price-old">AED 6,499</span>
+          </div>
+          <div class="product-rating">★★★★★ <span style="color:var(--muted)">(67)</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:48px">
+    <a href="#" class="btn-secondary" onclick="showPage('shop')">View All Products →</a>
+  </div>
+</section>
+
+<!-- FEATURED -->
+<section class="featured">
+  <div class="section-label">Editor's Pick</div>
+  <div class="section-title">FEATURED THIS WEEK</div>
+  <div class="featured-grid">
+    <div class="featured-main">
+      <div class="featured-drone">🚁</div>
+      <div class="featured-content">
+        <div class="featured-label">⚡ Limited Time Offer</div>
+        <div class="featured-title">DJI Mavic 3 Classic</div>
+        <p style="color:rgba(255,255,255,0.75);margin-bottom:16px;font-size:15px;line-height:1.7">Hasselblad camera with 4/3 CMOS sensor, 46-min flight time, and omnidirectional obstacle sensing. The best drone for serious creators.</p>
+        <div class="featured-price">AED 3,799</div>
+        <a href="#" class="btn-primary" onclick="showPage('detail')">Shop Now →</a>
+      </div>
+    </div>
+    <div class="featured-side">
+      <div class="featured-mini" onclick="showPage('detail')">
+        <div class="mini-icon">🏎️</div>
+        <div class="mini-title">DJI Avata 2</div>
+        <div style="color:#64748b;font-size:13px;margin-bottom:16px">Immersive FPV flight experience</div>
+        <div class="mini-price">AED 2,149</div>
+      </div>
+      <div class="featured-mini" onclick="showPage('detail')" style="background:linear-gradient(135deg,rgba(255,61,107,0.05),transparent)">
+        <div class="mini-icon">📡</div>
+        <div class="mini-title">DJI Air 3S</div>
+        <div style="color:#64748b;font-size:13px;margin-bottom:16px">Dual wide + tele camera system</div>
+        <div class="mini-price" style="color:var(--accent2)">AED 3,299</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section>
+  <div class="section-label">Our Guarantee</div>
+  <div class="section-title">WHY SKYRIFT</div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">🚀</div>
+      <div class="why-title">Express Delivery</div>
+      <div class="why-desc">Same-day delivery in Dubai. Next-day across UAE and major cities in India.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🔐</div>
+      <div class="why-title">Secure Payments</div>
+      <div class="why-desc">Cards, Apple Pay, bank transfer, crypto — all fully encrypted with SSL.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🛡️</div>
+      <div class="why-title">2-Year Warranty</div>
+      <div class="why-desc">Every product comes with manufacturer warranty plus our extended coverage.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">💬</div>
+      <div class="why-title">Expert Support</div>
+      <div class="why-desc">Drone pilots on our team ready to help 24/7 via chat, phone, or email.</div>
+    </div>
+  </div>
+</section>
+
+<!-- BRANDS -->
+<section class="brands">
+  <div class="section-label" style="justify-content:center">Official Partners</div>
+  <div class="section-title">AUTHORIZED DEALERS</div>
+  <div class="brands-grid">
+    <div class="brand-item">DJI</div>
+    <div class="brand-item">AUTEL</div>
+    <div class="brand-item">PARROT</div>
+    <div class="brand-item">SKYDIO</div>
+    <div class="brand-item">HOLY STONE</div>
+    <div class="brand-item">HUBSAN</div>
+    <div class="brand-item">POTENSIC</div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <h2>GET FIRST ACCESS<br>TO NEW LAUNCHES</h2>
+  <p>Join 24,000+ drone enthusiasts. No spam — just drops, deals, and reviews.</p>
+  <div class="newsletter-form">
+    <input class="newsletter-input" type="email" placeholder="your@email.com">
+    <button class="newsletter-submit">Subscribe</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a class="logo" href="#">SKY<span>RIFT</span></a>
+      <p>Premium drone store serving the UAE and India. Authorized dealer for all major brands. Fly smarter.</p>
+      <div class="social-links">
+        <a class="social-link" href="#">𝕏</a>
+        <a class="social-link" href="#">in</a>
+        <a class="social-link" href="#">▶</a>
+        <a class="social-link" href="#">📷</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="#" onclick="showPage('shop')">All Drones</a></li>
+        <li><a href="#">Consumer</a></li>
+        <li><a href="#">Professional</a></li>
+        <li><a href="#">Accessories</a></li>
+        <li><a href="#">Deals</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="#">Track Order</a></li>
+        <li><a href="#">Returns</a></li>
+        <li><a href="#">Warranty</a></li>
+        <li><a href="#">FAQs</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 SKYRIFT LLC. All rights reserved.</p>
+    <div class="payment-icons">
+      <span class="pay-icon">VISA</span>
+      <span class="pay-icon">MC</span>
+      <span class="pay-icon">AMEX</span>
+      <span class="pay-icon">APPLE PAY</span>
+      <span class="pay-icon">CRYPTO</span>
+    </div>
+  </div>
+</footer>
+</div>
+
+<!-- ====== SHOP PAGE ====== -->
+<div class="page" id="page-shop">
+  <div class="shop-hero">
+    <div class="section-label">500+ Products</div>
+    <h2>ALL DRONES & ACCESSORIES</h2>
+  </div>
+  <div class="shop-layout">
+    <!-- Sidebar -->
+    <div class="shop-sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-title">BRAND</div>
+        <div class="filter-option" onclick="toggleCheck(this)">
+          <div class="filter-check checked"></div>
+          <span class="filter-label">DJI</span>
+          <span class="filter-count">124</span>
+        </div>
+        <div class="filter-option" onclick="toggleCheck(this)">
+          <div class="filter-check"></div>
+          <span class="filter-label">Autel Robotics</span>
+          <span class="filter-count">56</span>
+        </div>
+        <div class="filter-option" onclick="toggleCheck(this)">
+          <div class="filter-check"></div>
+          <span class="filter-label">Parrot</span>
+          <span class="filter-count">34</span>
+        </div>
+        <div class="filter-option" onclick="toggleCheck(this)">
+          <div class="filter-check"></div>
+          <span class="filter-label">Skydio</span>
+          <span class="filter-count">18</span>
+        </div>
+        <div class="filter-option" onclick="toggleCheck(this)">
+          <div class="filter-check"></div>
+          <span class="filter-label">Holy Stone</span>
+          <span class="filter-count">89</span>
+        </div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-title">CATEGORY</div>
+        <div class="filter-option" onclick="toggleCheck(this)">
+          <div class="filter-check"></div>
+          <span class="filter-label">Consumer</span>
+          <span class="filter-count">180</span>
+        </div>
+        <div class="filter-option" onclick="toggleCheck(this)">
+          <div class="filter-check"></div>
+          <span class="filter-label">Professional</span>
+          <span class="filter-count">96</span>
+        </div>
+        <div class="filter-option" onclick="toggleCheck(this)">
+          <div class="filter-check"></div>
+          <span class="filter-label">Racing/FPV</span>
+          <span class="filter-count">78</span>
+        </div>
+        <div class="filter-option" onclick="toggleCheck(this)">
+          <div class="filter-check"></div>
+          <span class="filter-label">Agriculture</span>
+          <span class="filter-count">24</span>
+        </div>
+        <div class="filter-option" onclick="toggleCheck(this)">
+          <div class="filter-check"></div>
+          <span class="filter-label">Parts</span>
+          <span class="filter-count">122</span>
+        </div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-title">PRICE RANGE</div>
+        <div class="price-range">
+          <input type="range" class="price-slider" min="100" max="50000" value="10000" id="priceRange" oninput="updatePrice(this.value)">
+          <div class="price-labels">
+            <span>AED 100</span>
+            <span id="priceVal">AED 10,000</span>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-title">FLIGHT TIME</div>
+        <div class="filter-option" onclick="toggleCheck(this)">
+          <div class="filter-check"></div>
+          <span class="filter-label">Under 20 min</span>
+        </div>
+        <div class="filter-option" onclick="toggleCheck(this)">
+          <div class="filter-check"></div>
+          <span class="filter-label">20–35 min</span>
+        </div>
+        <div class="filter-option" onclick="toggleCheck(this)">
+          <div class="filter-check"></div>
+          <span class="filter-label">35+ min</span>
+        </div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-title">CAMERA</div>
+        <div class="filter-option" onclick="toggleCheck(this)">
+          <div class="filter-check"></div>
+          <span class="filter-label">4K</span>
+        </div>
+        <div class="filter-option" onclick="toggleCheck(this)">
+          <div class="filter-check"></div>
+          <span class="filter-label">6K+</span>
+        </div>
+        <div class="filter-option" onclick="toggleCheck(this)">
+          <div class="filter-check"></div>
+          <span class="filter-label">No Camera</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Products -->
+    <div class="shop-main">
+      <div class="shop-toolbar">
+        <div class="results-count"><span>487</span> products found</div>
+        <select class="sort-select">
+          <option>Best Selling</option>
+          <option>Price: Low → High</option>
+          <option>Price: High → Low</option>
+          <option>Newest First</option>
+          <option>Highest Rated</option>
+        </select>
+      </div>
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-badge badge-new">New</div>
+          <div class="product-img-wrap">🚁
+            <div class="product-actions">
+              <button class="action-btn action-add" onclick="addToCart('DJI Mavic 4 Pro', 4599)">Add to Cart</button>
+              <button class="action-btn action-wish">♡</button>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-brand">DJI</div>
+            <div class="product-name" onclick="showPage('detail')" style="cursor:pointer">Mavic 4 Pro</div>
+            <div class="product-specs"><span class="spec-tag">4K/120fps</span><span class="spec-tag">46min</span></div>
+            <div class="product-price-row">
+              <span class="product-price">AED 4,599</span>
+              <div class="product-rating">★★★★★</div>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-badge badge-sale">-30%</div>
+          <div class="product-img-wrap" style="background:linear-gradient(135deg,#f0eeff,#f8f4ff)">🛸
+            <div class="product-actions">
+              <button class="action-btn action-add" onclick="addToCart('DJI FPV Combo', 2199)">Add to Cart</button>
+              <button class="action-btn action-wish">♡</button>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-brand">DJI</div>
+            <div class="product-name" onclick="showPage('detail')" style="cursor:pointer">FPV Combo</div>
+            <div class="product-specs"><span class="spec-tag">4K/60fps</span><span class="spec-tag">150km/h</span></div>
+            <div class="product-price-row">
+              <div><span class="product-price">AED 2,199</span><span class="product-price-old">AED 3,100</span></div>
+              <div class="product-rating">★★★★★</div>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-badge badge-hot">Hot</div>
+          <div class="product-img-wrap" style="background:linear-gradient(135deg,#fff0f5,#fef2f7)">🎯
+            <div class="product-actions">
+              <button class="action-btn action-add" onclick="addToCart('Autel EVO Nano+', 1199)">Add to Cart</button>
+              <button class="action-btn action-wish">♡</button>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-brand">Autel Robotics</div>
+            <div class="product-name" onclick="showPage('detail')" style="cursor:pointer">EVO Nano+</div>
+            <div class="product-specs"><span class="spec-tag">4K/30fps</span><span class="spec-tag">28min</span></div>
+            <div class="product-price-row">
+              <span class="product-price">AED 1,199</span>
+              <div class="product-rating">★★★★☆</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== PRODUCT DETAIL PAGE ====== -->
+<div class="page" id="page-detail">
+  <div style="padding:90px 60px 0;background:var(--deep);border-bottom:1px solid var(--border)">
+    <div style="display:flex;gap:8px;align-items:center;padding:20px 0;font-size:12px;color:var(--muted);font-family:'Space Mono',monospace">
+      <a href="#" onclick="showPage('home')" style="color:var(--muted);text-decoration:none">Home</a>
+      <span>›</span>
+      <a href="#" onclick="showPage('shop')" style="color:var(--muted);text-decoration:none">Shop</a>
+      <span>›</span>
+      <span style="color:var(--accent)">DJI Mavic 3 Classic</span>
+    </div>
+  </div>
+  <div class="product-detail">
+    <!-- Gallery -->
+    <div class="detail-gallery">
+      <div class="main-image">🚁</div>
+      <div class="thumb-row">
+        <div class="thumb active">🚁</div>
+        <div class="thumb">📷</div>
+        <div class="thumb">🔋</div>
+        <div class="thumb">📡</div>
+      </div>
+    </div>
+    <!-- Info -->
+    <div class="detail-info">
+      <div class="detail-brand">DJI — Flagship Consumer Series</div>
+      <div class="detail-name">Mavic 3 Classic</div>
+      <div class="detail-rating">
+        <div class="stars">★★★★★</div>
+        <div class="rating-count" style="color:var(--muted);font-size:14px">4.9/5 · 312 reviews</div>
+      </div>
+      <div class="detail-price">AED 3,799</div>
+      <span class="detail-price-old">Was AED 4,500</span>
+      <p class="detail-desc">The DJI Mavic 3 Classic features the iconic Hasselblad camera with a 4/3 CMOS sensor for exceptional image quality. With 46-minute max flight time and omnidirectional obstacle sensing, it's built for professionals who demand the best.</p>
+      <div class="detail-specs">
+        <div class="spec-item">
+          <div class="spec-key">Camera</div>
+          <div class="spec-val">4/3 Hasselblad CMOS</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-key">Video</div>
+          <div class="spec-val">5.1K / 4K HDR</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-key">Flight Time</div>
+          <div class="spec-val">46 Minutes</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-key">Range</div>
+          <div class="spec-val">15 km (O3)</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-key">Max Speed</div>
+          <div class="spec-val">75.6 km/h</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-key">Weight</div>
+          <div class="spec-val">895 g</div>
+        </div>
+      </div>
+      <div class="qty-row">
+        <div class="qty-control">
+          <button onclick="changeQty(-1)">−</button>
+          <div class="qty-display" id="qtyDisplay">1</div>
+          <button onclick="changeQty(1)">+</button>
+        </div>
+        <button class="add-to-cart-main" onclick="addToCart('DJI Mavic 3 Classic', 3799)">Add to Cart →</button>
+      </div>
+      <button class="buy-now-btn" onclick="addToCart('DJI Mavic 3 Classic',3799); showPage('checkout')">Buy Now · Pay Later Available</button>
+      <div class="trust-badges">
+        <div class="trust-badge"><span>🚀</span> Express delivery</div>
+        <div class="trust-badge"><span>🔄</span> 30-day returns</div>
+        <div class="trust-badge"><span>🛡️</span> 2-year warranty</div>
+        <div class="trust-badge"><span>📦</span> Free shipping</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== CHECKOUT PAGE ====== -->
+<div class="page" id="page-checkout">
+  <div class="checkout-page">
+    <h2>CHECKOUT</h2>
+    <div class="checkout-steps">
+      <div class="step done">✓ Cart</div>
+      <div class="step active">02 · Info</div>
+      <div class="step">03 · Payment</div>
+      <div class="step">04 · Confirm</div>
+    </div>
+    <div class="checkout-grid">
+      <!-- Left: Form -->
+      <div>
+        <div class="form-section">
+          <h3>CONTACT INFO</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">First Name</label>
+              <input class="form-input" type="text" placeholder="Ahmed">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last Name</label>
+              <input class="form-input" type="text" placeholder="Al Rashidi">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input class="form-input" type="email" placeholder="ahmed@example.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone Number</label>
+            <input class="form-input" type="tel" placeholder="+971 50 000 0000">
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3>DELIVERY ADDRESS</h3>
+          <div class="form-group">
+            <label class="form-label">Country</label>
+            <select class="form-input sort-select" style="width:100%">
+              <option>United Arab Emirates</option>
+              <option>India</option>
+              <option>Saudi Arabia</option>
+              <option>Kuwait</option>
+              <option>Bahrain</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">City</label>
+              <input class="form-input" type="text" placeholder="Dubai">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Emirate / State</label>
+              <input class="form-input" type="text" placeholder="Dubai">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Street Address</label>
+            <input class="form-input" type="text" placeholder="Building, Street, Area">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Apartment / Unit (Optional)</label>
+            <input class="form-input" type="text" placeholder="Apartment 4B">
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3>PAYMENT METHOD</h3>
+          <div class="payment-methods">
+            <div class="payment-method selected" onclick="selectPayment(this)">
+              <div class="payment-radio"></div>
+              <div class="payment-method-icon">💳</div>
+              <div class="payment-method-info">
+                <h4>Credit / Debit Card</h4>
+                <p>Visa, Mastercard, Amex accepted</p>
+              </div>
+            </div>
+            <div class="card-fields" id="cardFields">
+              <div class="form-group">
+                <label class="form-label">Card Number</label>
+                <input class="form-input" type="text" placeholder="0000 0000 0000 0000" maxlength="19">
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Expiry Date</label>
+                  <input class="form-input" type="text" placeholder="MM / YY" maxlength="7">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">CVV</label>
+                  <input class="form-input" type="text" placeholder="000" maxlength="4">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Cardholder Name</label>
+                <input class="form-input" type="text" placeholder="As on card">
+              </div>
+            </div>
+
+            <div class="payment-method" onclick="selectPayment(this)">
+              <div class="payment-radio"></div>
+              <div class="payment-method-icon"></div>
+              <div class="payment-method-info">
+                <h4>Apple Pay</h4>
+                <p>Fast, secure checkout with Face ID</p>
+              </div>
+            </div>
+            <div class="payment-method" onclick="selectPayment(this)">
+              <div class="payment-radio"></div>
+              <div class="payment-method-icon">🏦</div>
+              <div class="payment-method-info">
+                <h4>Bank Transfer</h4>
+                <p>Direct bank transfer — 1 business day</p>
+              </div>
+            </div>
+            <div class="payment-method" onclick="selectPayment(this)">
+              <div class="payment-radio"></div>
+              <div class="payment-method-icon">₿</div>
+              <div class="payment-method-info">
+                <h4>Crypto</h4>
+                <p>Bitcoin, USDT, ETH accepted</p>
+              </div>
+            </div>
+            <div class="payment-method" onclick="selectPayment(this)">
+              <div class="payment-radio"></div>
+              <div class="payment-method-icon">🟢</div>
+              <div class="payment-method-info">
+                <h4>Tabby — Buy Now Pay Later</h4>
+                <p>Split in 4 payments, 0% interest</p>
+              </div>
+            </div>
+            <div class="payment-method" onclick="selectPayment(this)">
+              <div class="payment-radio"></div>
+              <div class="payment-method-icon">💵</div>
+              <div class="payment-method-info">
+                <h4>Cash on Delivery</h4>
+                <p>Pay when your order arrives</p>
+              </div>
+            </div>
+          </div>
+          <button class="checkout-btn" onclick="placeOrder()" style="margin-top:8px">Place Order →</button>
+          <div class="secure-checkout">🔒 256-bit SSL Encrypted · PCI DSS Compliant</div>
+        </div>
+      </div>
+
+      <!-- Right: Order Summary -->
+      <div>
+        <div class="order-summary">
+          <h3>ORDER SUMMARY</h3>
+          <div id="orderItems">
+            <div class="order-item">
+              <div>
+                <div class="order-item-name">DJI Mavic 3 Classic</div>
+                <div class="order-item-qty">Qty: 1</div>
+              </div>
+              <div class="order-item-price">AED 3,799</div>
+            </div>
+          </div>
+          <div class="order-totals">
+            <div class="order-line">
+              <span class="label">Subtotal</span>
+              <span id="subtotalVal">AED 3,799</span>
+            </div>
+            <div class="order-line">
+              <span class="label">Shipping</span>
+              <span style="color:var(--accent)">Free</span>
+            </div>
+            <div class="order-line">
+              <span class="label">VAT (5%)</span>
+              <span id="vatVal">AED 190</span>
+            </div>
+            <div class="order-line total">
+              <span>Total</span>
+              <span class="price" id="grandTotal">AED 3,989</span>
+            </div>
+          </div>
+          <div class="promo-code">
+            <input class="promo-input" type="text" placeholder="Promo code">
+            <button class="promo-btn">Apply</button>
+          </div>
+          <div class="secure-checkout" style="margin-top:0">
+            <span>Accepted payments:</span>
+          </div>
+          <div class="payment-icons" style="margin-top:12px;flex-wrap:wrap;gap:6px">
+            <span class="pay-icon">VISA</span>
+            <span class="pay-icon">MC</span>
+            <span class="pay-icon">AMEX</span>
+            <span class="pay-icon" style="font-size:10px">APPLE PAY</span>
+            <span class="pay-icon">₿</span>
+            <span class="pay-icon" style="font-size:9px">TABBY</span>
+            <span class="pay-icon" style="font-size:9px">COD</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== SUCCESS PAGE ====== -->
+<div class="page" id="page-success">
+  <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:120px 60px;background:linear-gradient(135deg,#eef3ff,#f8faff)">
+    <div style="font-size:80px;margin-bottom:32px;animation:float 4s ease-in-out infinite">✅</div>
+    <div class="section-label" style="justify-content:center">Order Confirmed</div>
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:72px;margin-bottom:16px">ORDER PLACED!</h2>
+    <p style="color:var(--muted);font-size:16px;max-width:480px;line-height:1.8;margin-bottom:40px">Your drone is on its way. You'll receive a confirmation email and tracking link within 30 minutes.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <a href="#" class="btn-primary" onclick="showPage('home')">Continue Shopping</a>
+      <a href="#" class="btn-secondary">Track Order →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// Cart State
+let cart = [];
+let qty = 1;
+
+function showPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function toggleCart() {
+  const overlay = document.getElementById('cartOverlay');
+  const sidebar = document.getElementById('cartSidebar');
+  overlay.classList.toggle('open');
+  sidebar.classList.toggle('open');
+}
+
+function addToCart(name, price) {
+  const existing = cart.find(i => i.name === name);
+  if (existing) {
+    existing.qty++;
+  } else {
+    cart.push({ name, price, qty: 1, icon: getIcon(name) });
+  }
+  updateCart();
+  showToast(name + ' added to cart!');
+}
+
+function getIcon(name) {
+  if (name.includes('FPV')) return '🛸';
+  if (name.includes('Agras')) return '🌿';
+  if (name.includes('Skydio')) return '💎';
+  if (name.includes('Holy')) return '🎯';
+  return '🚁';
+}
+
+function updateCart() {
+  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  const count = cart.reduce((s, i) => s + i.qty, 0);
+  document.getElementById('cartCount').textContent = count;
+  document.getElementById('cartTotal').textContent = 'AED ' + total.toLocaleString();
+
+  const itemsEl = document.getElementById('cartItems');
+  if (cart.length === 0) {
+    itemsEl.innerHTML = '<div style="text-align:center;padding:60px 0;color:var(--muted)"><div style="font-size:48px;margin-bottom:16px">🚁</div><p style="font-family:Space Mono,monospace;font-size:12px;letter-spacing:2px">YOUR CART IS EMPTY</p></div>';
+    return;
+  }
+  itemsEl.innerHTML = cart.map((item, i) => `
+    <div class="cart-item">
+      <div class="cart-item-img">${item.icon}</div>
+      <div style="flex:1">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-price">AED ${item.price.toLocaleString()}</div>
+        <div class="cart-item-qty">
+          <button class="qty-btn" onclick="changeCartQty(${i},-1)">−</button>
+          <span class="qty-num">${item.qty}</span>
+          <button class="qty-btn" onclick="changeCartQty(${i},1)">+</button>
+          <button class="qty-btn" onclick="removeCartItem(${i})" style="margin-left:8px;color:var(--accent2)">✕</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  // Update checkout page
+  const orderItems = document.getElementById('orderItems');
+  if (orderItems) {
+    orderItems.innerHTML = cart.map(item => `
+      <div class="order-item">
+        <div>
+          <div class="order-item-name">${item.name}</div>
+          <div class="order-item-qty">Qty: ${item.qty}</div>
+        </div>
+        <div class="order-item-price">AED ${(item.price * item.qty).toLocaleString()}</div>
+      </div>
+    `).join('');
+    const vat = Math.round(total * 0.05);
+    const grand = total + vat;
+    document.getElementById('subtotalVal').textContent = 'AED ' + total.toLocaleString();
+    document.getElementById('vatVal').textContent = 'AED ' + vat.toLocaleString();
+    document.getElementById('grandTotal').textContent = 'AED ' + grand.toLocaleString();
+  }
+}
+
+function changeCartQty(i, d) {
+  cart[i].qty = Math.max(1, cart[i].qty + d);
+  updateCart();
+}
+
+function removeCartItem(i) {
+  cart.splice(i, 1);
+  updateCart();
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = '✓ ' + msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// Product detail qty
+function changeQty(d) {
+  qty = Math.max(1, qty + d);
+  document.getElementById('qtyDisplay').textContent = qty;
+}
+
+function toggleCheck(el) {
+  el.querySelector('.filter-check').classList.toggle('checked');
+}
+
+function updatePrice(val) {
+  document.getElementById('priceVal').textContent = 'AED ' + parseInt(val).toLocaleString();
+}
+
+function selectPayment(el) {
+  document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('selected'));
+  el.classList.add('selected');
+  const cardFields = document.getElementById('cardFields');
+  if (el.querySelector('h4').textContent.includes('Credit')) {
+    cardFields.style.display = 'block';
+  } else {
+    cardFields.style.display = 'none';
+  }
+}
+
+function placeOrder() {
+  if (cart.length === 0) {
+    showToast('Add items to cart first!');
+    return;
+  }
+  cart = [];
+  updateCart();
+  showPage('success');
+}
+
+// Filter tabs
+document.querySelectorAll('.filter-tab').forEach(tab => {
+  tab.addEventListener('click', function() {
+    this.closest('.filter-tabs').querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
